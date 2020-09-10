@@ -178,19 +178,11 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	};
 	
 	function get_view_url_beginning(){
-		var url2 = document.referrer;
-		console.log("url1: " + url2);
-		var url_parts = url2.replace(/\/\s*$/,'').split('/'); 
-		url_parts.shift();
-		return 'http://localhost:8080/public/' + url_parts[3] + '/dashboard?view=';
+		return 'http://localhost:8080/public/' + getUrlParameter('database') + '/dashboard?view=';
 	}
 	
 	function get_data_url_beginning(){
-		var url2 = document.referrer;
-		console.log("url2: " + url2);
-		var url_parts = url2.replace(/\/\s*$/,'').split('/'); 
-		url_parts.shift();
-		return 'http://localhost:8080/data/' + url_parts[3] + '/';
+		return 'http://localhost:8080/data/' + getUrlParameter('database') + '/';
 	}
 	
 	async function run_processes() {
