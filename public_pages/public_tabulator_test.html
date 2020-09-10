@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="https://unpkg.com/tabulator-tables@4.0.5/dist/css/tabulator.min.css" rel="stylesheet">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+	</head>
+	<body>
+		<div id="example-table"></div>
+		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.0.5/dist/js/tabulator.min.js"></script>
+		<script type="text/javascript">
+	
+	async function get() {
+		let url = 'http://localhost:8080/data/manna/all_hour_cards';
+		let obj = await (await fetch(url)).json();
+		
+		return obj;
+	};
+	var custom_view;
+	(async () => {
+	  custom_view = await get();
+	console.log(custom_view);
+	  
+	var tabledata = [
+	];
+	
+	$.each(custom_view.records, function(index, record) {
+		var login_date_ISO_FORMAT = "";
+		if(record.columns.login_time.dateValue != undefined){
+			var login_year = record.columns.login_time.dateValue.year;
+			var login_month = record.columns.login_time.dateValue.month - 1;
+			var login_day = record.columns.login_time.dateValue.day;
+			var login_hour = record.columns.login_time.timeValue.hour;
+			var login_minute = record.columns.login_time.timeValue.minute;
+			var login_second = record.columns.login_time.timeValue.second;
+			var login_date = new Date(login_year, login_month, login_day, login_hour, login_minute, 0, 0);
+			login_date_ISO_FORMAT = login_date.toISOString().substring(0,login_date.toISOString().length - 5);
+		}
+		var logout_date_ISO_FORMAT = "";
+		if(record.columns.logout_time.dateValue != undefined){
+			var logout_year = record.columns.logout_time.dateValue.year;
+			var logout_month = record.columns.logout_time.dateValue.month - 1;
+			var logout_day = record.columns.logout_time.dateValue.day;
+			var logout_hour = record.columns.logout_time.timeValue.hour;
+			var logout_minute = record.columns.logout_time.timeValue.minute;
+			var logout_second = record.columns.logout_time.timeValue.second;
+			var logout_date = new Date(logout_year, logout_month, logout_day, logout_hour, logout_minute, 0, 0);
+			logout_date_ISO_FORMAT = logout_date.toISOString().substring(0,logout_date.toISOString().length - 5);
+		}
+		tabledata.push({
+			name:record.columns.employee_name.stringValue,
+			login_time:login_date_ISO_FORMAT,
+			logout_time:logout_date_ISO_FORMAT
+		});
+	});
+
+		var table = new Tabulator("#example-table", {
+			height:200, 
+			data:tabledata, 
+			layout:"fitColumns", 
+			columns:[ 
+				{title:"Name", field:"name", sorter:"string", width:150},
+				{title:"Date Of Birth", field:"login_time", sorter:"date", align:"center"},
+				{title:"Date Of Birth", field:"logout_time", sorter:"date", align:"center"}
+			],
+			rowClick:function(e, id, data, row){
+				alert("Row " + id + " Clicked!!!!");
+			}
+		});
+	})()
+</script>
+	</body>
+</html>

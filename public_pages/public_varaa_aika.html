@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+			<!-- bootstrap -->
+			<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />	
+			<!-- font-awesome -->
+			<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+			<!-- jquery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+			<!-- popper -->	
+			<script src="/webjars/popper.js/1.14.3/umd/popper.min.js"></script>	
+			<!-- bootstrap -->
+			<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
+			<!-- confirmation -->
+			<script>
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+ 
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+ 
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+</script>
+<script>
+$( document ).ready(function() {
+	console.log("doc ready");
+	var f = document.createElement("form");
+	var record_id = getUrlParameter("record_id");
+	console.log(record_id);
+	f.setAttribute('id',"form_id");
+	f.setAttribute('method',"post");
+	f.setAttribute('action',"http://localhost:5000/post_payment_form");
+
+	var visible_inputs = [
+		{label:"Email",name:"email",type:"email",value:""}
+	];
+	var hidden_inputs = [
+		{name:"bambora_return_url",type:"hidden",value:"http://localhost:5000/bambora_return_url/manna"},
+		{name:"bambora_notify_url",type:"hidden",value:"http://localhost:5000/bambora_notify_url/manna"},
+		{name:"database_name",type:"hidden",value:"manna"},
+		{name:"product_name",type:"hidden",value:"hieronta"},
+		{name:"record_id",type:"hidden",value:record_id},
+		{name:"table",type:"hidden",value:"hour_card"},
+		{name:"field",type:"hidden",value:"state"},
+		{name:"field_type",type:"hidden",value:"text"},
+		{name:"field_value",type:"hidden",value:"reserved"},
+		{name:"email_from",type:"hidden",value:"ajanvaraus"},
+		{name:"email_subject",type:"hidden",value:"Vahvistus ajanvarauksesta"},
+		{name:"email_text",type:"hidden",value:"Hei! Varauksesi on vahvistettu. Terveisin Matin Mattopesu Oy"}
+	];
+	
+	
+	$.each(visible_inputs, function(index, visible_input) {
+		var l = document.createElement("LABEL");
+		l.innerHTML = visible_input.label;
+		f.appendChild(l);
+		
+		var i = document.createElement("input"); 
+		i.setAttribute('type',visible_input.type);
+		i.setAttribute('class',"form-control");
+		i.setAttribute('name',visible_input.name);
+		i.setAttribute('value',visible_input.value);
+		f.appendChild(i);
+	});
+	$.each(hidden_inputs, function(index, hidden_input) {
+		var i = document.createElement("input"); 
+		i.setAttribute('id',hidden_input.name);
+		i.setAttribute('type',hidden_input.type);
+		i.setAttribute('class',"form-control");
+		i.setAttribute('name',hidden_input.name);
+		i.setAttribute('value',hidden_input.value);
+		f.appendChild(i);
+	});
+	document.getElementById('formdiv_body').appendChild(f);
+
+	var s = document.createElement("input");
+	s.setAttribute('type',"submit");
+	s.setAttribute('value',"Varaa aika");
+	s.setAttribute('class',"btn btn-primary");
+	s.setAttribute("form","form_id");
+	document.getElementById('formdiv_footer').appendChild(s);
+});
+</script>
+	</head>
+	<body>
+		<div class="row mt-5">
+			<div class="col-lg-4">
+			</div>
+			<div class="col-lg-4">
+				<div class="card">
+				  <div class="card-header">
+				<h4>Vahvista ja maksa varaus</h4>
+				  </div>
+				  <div class="card-body">
+					<div class="form-group">
+						<div id="formdiv_body">
+						</div>
+					</div>
+				</div>
+				  <div class="card-footer">
+						<div id="formdiv_footer">
+						</div>
+				  </div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset='utf-8' />
+			<!-- bootstrap -->
+			<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />	
+			<!-- font-awesome -->
+			<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+			<!-- jquery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+			<!-- popper -->	
+			<script src="/webjars/popper.js/1.14.3/umd/popper.min.js"></script>	
+			<!-- bootstrap -->
+			<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
+			<!-- confirmation -->
+	</head>
+	<body>
+
+
+		<div class="row mt-5">
+			<div class="col-lg-4">
+			</div>
+			<div class="col-lg-4">
+				<form th:action="${'http://localhost:5000/post_payment_form'}" method="post">
+					<div class="card">
+					  <div class="card-header">
+					<h4>Varaus vahvistettu</h4>
+					  </div>
+					  <div class="card-body">Varausvahvistus on lahetetty sahkopostiisi</div>
+					  <div class="card-footer">
+					  <a href="http://localhost:8080/public/manna/ajanvaraus">Takaisin varauskalenteriin</a>
+					  </div>
+				</form>
+			</div>
+		</div>
+
+</body>
+</html>
