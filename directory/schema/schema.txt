@@ -1,0 +1,264 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1600252236.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"database_name",
+		"views",
+		"views_edit"
+	],
+	"properties": {
+		"database_name": {
+			"$id": "#root/database_name", 
+			"title": "Database_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"directory"
+			],
+			"pattern": "^.*$"
+		},
+		"views": {
+			"$id": "#root/views", 
+			"title": "Views", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/views/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"view_name",
+					"edit_view_name",
+					"edit_table",
+					"view_alias",
+					"columns_from_json"
+				],
+				"properties": {
+					"view_name": {
+						"$id": "#root/views/items/view_name", 
+						"title": "View_name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"all_users"
+						],
+						"pattern": "^.*$"
+					},
+					"edit_view_name": {
+						"$id": "#root/views/items/edit_view_name", 
+						"title": "Edit_view_name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"all_users"
+						],
+						"pattern": "^.*$"
+					},
+					"edit_table": {
+						"$id": "#root/views/items/edit_table", 
+						"title": "Edit_table", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"persons.user"
+						],
+						"pattern": "^.*$"
+					},
+					"view_alias": {
+						"$id": "#root/views/items/view_alias", 
+						"title": "View_alias", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Kaikki henkilot"
+						],
+						"pattern": "^.*$"
+					},
+					"columns_from_json": {
+						"$id": "#root/views/items/columns_from_json", 
+						"title": "Columns_from_json", 
+						"type": "array",
+						"default": [],
+						"items":{
+							"$id": "#root/views/items/columns_from_json/items", 
+							"title": "Items", 
+							"type": "object",
+							"required": [
+								"column_type",
+								"column_alias",
+								"column_name",
+								"running_number"
+							],
+							"properties": {
+								"column_type": {
+									"$id": "#root/views/items/columns_from_json/items/column_type", 
+									"title": "Column_type", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"text"
+									],
+									"pattern": "^.*$"
+								},
+								"column_alias": {
+									"$id": "#root/views/items/columns_from_json/items/column_alias", 
+									"title": "Column_alias", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"Email"
+									],
+									"pattern": "^.*$"
+								},
+								"column_name": {
+									"$id": "#root/views/items/columns_from_json/items/column_name", 
+									"title": "Column_name", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"email"
+									],
+									"pattern": "^.*$"
+								},
+								"running_number": {
+									"$id": "#root/views/items/columns_from_json/items/running_number", 
+									"title": "Running_number", 
+									"type": "integer",
+									"examples": [
+										1
+									],
+									"default": 0
+								}
+							}
+						}
+
+					}
+				}
+			}
+
+		},
+		"views_edit": {
+			"$id": "#root/views_edit", 
+			"title": "Views_edit", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/views_edit/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"view_name",
+					"view_alias",
+					"return_table_id",
+					"edit_table",
+					"columns_from_json"
+				],
+				"properties": {
+					"view_name": {
+						"$id": "#root/views_edit/items/view_name", 
+						"title": "View_name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"edit_group"
+						],
+						"pattern": "^.*$"
+					},
+					"view_alias": {
+						"$id": "#root/views_edit/items/view_alias", 
+						"title": "View_alias", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Ryhma"
+						],
+						"pattern": "^.*$"
+					},
+					"return_table_id": {
+						"$id": "#root/views_edit/items/return_table_id", 
+						"title": "Return_table_id", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"all_groups"
+						],
+						"pattern": "^.*$"
+					},
+					"edit_table": {
+						"$id": "#root/views_edit/items/edit_table", 
+						"title": "Edit_table", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"persons.group"
+						],
+						"pattern": "^.*$"
+					},
+					"columns_from_json": {
+						"$id": "#root/views_edit/items/columns_from_json", 
+						"title": "Columns_from_json", 
+						"type": "array",
+						"default": [],
+						"items":{
+							"$id": "#root/views_edit/items/columns_from_json/items", 
+							"title": "Items", 
+							"type": "object",
+							"required": [
+								"column_type",
+								"column_alias",
+								"column_name",
+								"running_number"
+							],
+							"properties": {
+								"column_type": {
+									"$id": "#root/views_edit/items/columns_from_json/items/column_type", 
+									"title": "Column_type", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"text"
+									],
+									"pattern": "^.*$"
+								},
+								"column_alias": {
+									"$id": "#root/views_edit/items/columns_from_json/items/column_alias", 
+									"title": "Column_alias", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"Ryhma"
+									],
+									"pattern": "^.*$"
+								},
+								"column_name": {
+									"$id": "#root/views_edit/items/columns_from_json/items/column_name", 
+									"title": "Column_name", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"group_name"
+									],
+									"pattern": "^.*$"
+								},
+								"running_number": {
+									"$id": "#root/views_edit/items/columns_from_json/items/running_number", 
+									"title": "Running_number", 
+									"type": "integer",
+									"examples": [
+										2
+									],
+									"default": 0
+								}
+							}
+						}
+
+					}
+				}
+			}
+
+		}
+	}
+}
