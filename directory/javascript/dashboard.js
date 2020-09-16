@@ -1,72 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Simple Sidebar - Start Bootstrap Template</title>
-
-
-  <!-- Custom styles for this template -->
-  <style>
-   #wrapper {
-    overflow-x: hidden;
- }
-
-#sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-}
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
-}
-
-@media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
-}
-  </style>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/>
- 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-
-			<script>
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -81,75 +13,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-</script>
-</head>
 
-<body>
-
-  <div class="d-flex" id="wrapper">
-
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div id="company_name_slot" class="sidebar-heading"></div>
-      <div id="sidebarlist" class="list-group list-group-flush">
-        
-      </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-white bg-white">
-        <button class="btn btn-primary" id="menu-toggle">
-      		<span 
-      		data-feather="chevron-left"
-      		>
-      		</span></button>
-
-          
-        </button>
-
-      </nav>
-
-      <div class="container-fluid">
-       
-		<div class="row">
-			<div class="col">
-				<div class="card">
-				  <div class="card-header ">
-				    <div class="d-flex justify-content-between">
-				<h4 id="datatable_heading"></h4>
-    
-					<button 
-					id="new_record_button"
-        			style="color:#000066;"
-					class="btn btn-primary"
-					>					
-						<span data-feather="plus"></span>
-					</button>
-  </div>
-				  </div>
-				  <div class="card-body">
-					<div class="form-group">
-<table id="example" class="display" style="width:100%">
-        <thead>
-            <tr id="header_row">
-            </tr>
-        </thead>
-        <tfoot>
-            <tr id="footer_row">
-            </tr>
-        </tfoot>
-    </table>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	
-	<script>
-	
 	function date_to_euro_date(datetime_value){
 		var dt_year = datetime_value.dateValue.year;
 		var dt_month = datetime_value.dateValue.month - 1;
@@ -178,11 +42,17 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	};
 	
 	function get_view_url_beginning(){
-		return 'http://localhost:8080/public/' + getUrlParameter('database') + '/dashboard?view=';
+		var url2 = window.location.href;
+		var url_parts = url2.replace(/\/\s*$/,'').split('/'); 
+		url_parts.shift();
+		return '/private/' + url_parts[3] + '/dashboard?view=';
 	}
 	
 	function get_data_url_beginning(){
-		return 'http://localhost:8080/data/' + getUrlParameter('database') + '/';
+		var url2 = window.location.href;
+		var url_parts = url2.replace(/\/\s*$/,'').split('/'); 
+		url_parts.shift();
+		return '/data/' + url_parts[3] + '/';
 	}
 	
 	async function run_processes() {
@@ -207,6 +77,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 			console.log(defs1);
 			model = defs1;
 			
+			
 			var company_name_slot = document.getElementById("company_name_slot");
 			if(model.customer_name != undefined){
 				var company_name = document.createTextNode(model.customer_name.toUpperCase()); 
@@ -228,7 +99,17 @@ var getUrlParameter = function getUrlParameter(sParam) {
 			});
 		});
 		custom_view_promise.then(function(defs2){
+		
+					
 			custom_view = defs2;
+			
+			//Excel link
+			var excel_div = document.getElementById("excel_div");
+					var excel_link = document.createElement('A');
+					var link = document.createTextNode('EXCEL'); 
+					excel_link.appendChild(link);  
+					excel_link.setAttribute('href','/EXCELS_export/' + custom_view.database_name + '/' + custom_view.view_name);
+					excel_div.appendChild(excel_link);
 			
 				var datatable_heading = document.getElementById("datatable_heading");
 				var view_alias = custom_view.view_alias;
@@ -242,7 +123,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 		
 		var header_cols = [];
 		header_cols.push("");
-		$.each(custom_view.columns, function( index, view_column ){
+		$.each(custom_view.columns_sorted, function( index, view_column ){
 			header_cols.push(view_column.column_alias);
 		});
 		header_cols.push("");
@@ -287,27 +168,27 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	var tabledata = [];	
 	$.each(custom_view.records, function(index, record) {
 		var row_data = [];
-		var edit_href = href="/public/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=" + record.id;
+		var edit_href = href="/private/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=" + record.id;
 		row_data.push(edit_href);
-		$.each(record.columns, function( index, record_column ){
-			var col_name = record_column.column_name;
+		$.each(custom_view.columns_sorted, function( index, view_column ){
+			var col_name = view_column.column_name;
 			var col_value = "";
-			if('text' == record_column.column_type){
+			if('text' == view_column.column_type){
 				col_value = record.columns[col_name].stringValue;
 				if(col_value == undefined){
 					col_value = "";
 				}
 			}
-			if('double' == record_column.column_type){
+			if('double' == view_column.column_type){
 				col_value = record.columns[col_name].doubleValue;
 			}
-			if('integer' == record_column.column_type){
+			if('integer' == view_column.column_type){
 				col_value = record.columns[col_name].doubleValue;
 			}
-			if('foreign_id' == record_column.column_type){
+			if('foreign_id' == view_column.column_type){
 				col_value = record.columns[col_name].doubleValue;
 			}
-			if('datetime' == record_column.column_type){
+			if('datetime' == view_column.column_type){
 				date_column_indexes.push(index);
 				if(record.columns[col_name].dateValue != undefined){
 					col_value = date_to_euro_date(record.columns[col_name]);
@@ -322,7 +203,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	
 	var header_cols = [];
 	header_cols.push({title:""});
-	$.each(custom_view.columns, function( index, view_column ){
+	$.each(custom_view.columns_sorted, function( index, view_column ){
 		header_cols.push({title: view_column.column_alias});
 	});
 	header_cols.push({title: ""});
@@ -377,7 +258,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 function create_record(){
 
 	var create_url = '/CRUD_REST/' + custom_view.database_name + '/' + custom_view.edit_table + '/create_record_REST';
-		var edit_href = href="/public/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=";
+		var edit_href = href="/private/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=";
 	$.ajax({
 	  type: "POST",
 	  url: create_url,
@@ -394,7 +275,7 @@ function create_record(){
 		   }
 	});
 }
-	
+
 function delete_record(record_id_to_delete){
 
 	var delete_url = '/CRUD_REST/' + custom_view.database_name + '/' + custom_view.edit_table + '/' + record_id_to_delete + '/delete_record_REST';
@@ -420,23 +301,3 @@ $(document).ready(function() {
   feather.replace()
 } );
 	})();
-	</script>
-      </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
-
-</body>
-
-</html>

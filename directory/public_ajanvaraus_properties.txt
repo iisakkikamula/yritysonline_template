@@ -1,7 +1,0 @@
-{
-	views:[
-		{
-			view_name:"all_hour_cards"
-		}
-	]
-}
