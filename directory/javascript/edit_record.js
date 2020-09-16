@@ -40,7 +40,7 @@
 		var url2 = window.location.href;
 		var url_parts = url2.replace(/\/\s*$/, '').split('/');
 		url_parts.shift();
-		var dataurl = '/data/' + url_parts[3] + "/" + getUrlParameter('edit_view') + '/' + getUrlParameter('record_id');
+		var dataurl = '/data/' + url_parts[3] + "/" + getUrlParameter('view') + '/' + getUrlParameter('record_id');
 		//console.log("dataurl: " + dataurl);
 		let obj = await (await fetch(dataurl)).json();
 

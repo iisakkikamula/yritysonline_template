@@ -168,7 +168,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	var tabledata = [];	
 	$.each(custom_view.records, function(index, record) {
 		var row_data = [];
-		var edit_href = href="/private/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=" + record.id;
+		var edit_href = href="/private/" + custom_view.database_name + "/edit_record?view=" + custom_view.edit_view_name + "&record_id=" + record.id;
 		row_data.push(edit_href);
 		$.each(custom_view.columns_sorted, function( index, view_column ){
 			var col_name = view_column.column_name;
@@ -258,7 +258,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 function create_record(){
 
 	var create_url = '/CRUD_REST/' + custom_view.database_name + '/' + custom_view.edit_table + '/create_record_REST';
-		var edit_href = href="/private/" + custom_view.database_name + "/edit_via_rest?edit_view=" + custom_view.edit_view_name + "&record_id=";
+		var edit_href = href="/private/" + custom_view.database_name + "/edit_record?view=" + custom_view.edit_view_name + "&record_id=";
 	$.ajax({
 	  type: "POST",
 	  url: create_url,
