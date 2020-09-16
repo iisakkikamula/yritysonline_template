@@ -64,7 +64,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	   };
        $.ajax({
            type: "POST",
-           url: "/private/json/json_schema_validator/save_model/" + getUrlParameter('database_name'),
+           url: "/schema/" + getUrlParameter('database_name') + "/json_schema_validator/save_model",
            dataType: "json",
 		   contentType: "application/json; charset=utf-8",
            data: datastring,

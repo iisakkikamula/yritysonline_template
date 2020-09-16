@@ -40,7 +40,7 @@
 		var url2 = window.location.href;
 		var url_parts = url2.replace(/\/\s*$/, '').split('/');
 		url_parts.shift();
-		var dataurl = '/data/' + url_parts[3] + "/" + getUrlParameter('view') + '/' + getUrlParameter('record_id');
+		var dataurl = '/data/' + url_parts[3] + "/fetch/" + getUrlParameter('view') + '/' + getUrlParameter('record_id');
 		//console.log("dataurl: " + dataurl);
 		let obj = await (await fetch(dataurl)).json();
 
@@ -286,7 +286,7 @@
 		function delete_file(id) {
 			$.ajax({
 				type: "POST",
-				url: '/dropbox/deleteFileREST/' + custom_view.database_name + '/' + id,
+				url: '/dropbox/' + custom_view.database_name + '/deleteFileREST/' + id,
 				data: JSON.stringify({}),
 				dataType: "json",
 				contentType: "application/json; charset=utf-8",
@@ -308,7 +308,7 @@
 				fdata.append('files-' + i, file);
 			});
 			$.ajax({
-				url: '/dropbox/uploadREST/' + custom_view.database_name + '/' + custom_view.edit_table + '/' + custom_view.records[0].id,
+				url: '/dropbox/' + custom_view.database_name + '/uploadREST/' + custom_view.edit_table + '/' + custom_view.records[0].id,
 				type: "POST",
 				data: fdata,
 				enctype: 'multipart/form-data',

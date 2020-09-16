@@ -57,7 +57,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	
 	async function run_processes() {
 		let model_url = get_data_url_beginning() + "model_structure";
-		let view_url = get_data_url_beginning() + getUrlParameter('view');
+		let view_url = get_data_url_beginning() + "/fetch/" + getUrlParameter('view');
 		var view_obj;
 		var model_obj;
 		res = await Promise.all([
@@ -257,7 +257,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 	
 function create_record(){
 
-	var create_url = '/CRUD_REST/' + custom_view.database_name + '/' + custom_view.edit_table + '/create_record_REST';
+	var create_url = '/CRUD_REST/' + custom_view.database_name + '/create_record_REST/' + custom_view.edit_table + "/execute";
 		var edit_href = href="/private/" + custom_view.database_name + "/edit_record?view=" + custom_view.edit_view_name + "&record_id=";
 	$.ajax({
 	  type: "POST",
@@ -278,7 +278,7 @@ function create_record(){
 
 function delete_record(record_id_to_delete){
 
-	var delete_url = '/CRUD_REST/' + custom_view.database_name + '/' + custom_view.edit_table + '/' + record_id_to_delete + '/delete_record_REST';
+	var delete_url = '/CRUD_REST/' + custom_view.database_name + '/delete_record_REST/' + custom_view.edit_table + '/' + record_id_to_delete;
 	$.ajax({
 	  type: "POST",
 	  url: delete_url,
