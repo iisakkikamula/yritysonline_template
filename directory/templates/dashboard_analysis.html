@@ -15,18 +15,14 @@
   <link rel="stylesheet" type="text/css" href="https://dl.dropbox.com/s/bdnydgtbdcm5q7v/dashboard.css" />
   <!-- bootstrap CSS-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
-  <!-- nettables bootstrap4.css -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
   <!-- jquery-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <!-- datatables jquery-->
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <!-- bootstrap js-->
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-  <!-- nettables bootstrap4 js-->
+  <!-- feather icons -->
   <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   <!-- yritysonline -->
   <script src="https://dl.dropbox.com/s/mlbrm7dw8alvbm1/yritysonline.js"></script>
+  <!-- Google charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 
@@ -70,15 +66,7 @@
                   <div class="row">
                     <div class="col">
                       <button id="toggle_analysis_button" class="btn btn-primary">
-                        Analysis
-                      </button>
-                    </div>
-                    <div class="col" id="excel_div">
-
-                    </div>
-                    <div class="col">
-                      <button id="new_record_button" class="btn btn-success">
-                        <span data-feather="plus"></span>
+                        Close
                       </button>
                     </div>
                   </div>
@@ -86,26 +74,17 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="form-group">
-                  <table id="example" class="display" style="width:100%">
-                    <thead>
-                      <tr id="header_row">
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr id="footer_row">
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div id="card_body_div" class="row">
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
-    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#page-content-wrapper -->
 
   </div>
   <!-- /#wrapper -->
@@ -118,7 +97,9 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
-  <script src="https://dl.dropbox.com/s/5l2sphur3x1cn1b/dashboard.js"></script>
+  <script src="https://dl.dropbox.com/s/at5fp2ugocy2y5k/dashboard_analysis.js">
+
+  </script>
 
 </body>
 
